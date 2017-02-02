@@ -10,13 +10,12 @@
   var add = function() {
     var url = window.location.href.replace('/edit', '/options/delete');
 
-    if((window.location.pathname.match(/\//g) || []).length < 3 || $('#delete').length) return;
+    if((window.location.pathname.match(/\//g) || []).length < 3 || $('[data-shortcut="#"]').length) return;
 
     $.get(url, function(data) {
-
       if(!data) return;
 
-      var link = $('<a id="delete"><i class="icon icon-left fa fa-trash-o"></i>' + data.label + '</a>');
+      var link = $('<a><i class="icon icon-left fa fa-trash-o"></i>' + data.label + '</a>');
 
       if(data.href) {
         link.attr('href', data.href);
