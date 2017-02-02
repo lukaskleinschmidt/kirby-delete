@@ -1,4 +1,4 @@
-# Kirby Delte
+# Kirby Delete
 Allows you to delete pages containing subpages.
 
 ## Installation
