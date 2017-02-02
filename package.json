@@ -1,0 +1,7 @@
+{
+  "name": "delete",
+  "version": "1.0.0",
+  "description": "Kirby Delete",
+  "license": "MIT",
+  "type": "kirby-plugin",
+}
