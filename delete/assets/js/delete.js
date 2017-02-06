@@ -1,30 +1,31 @@
 (function($) {
 
-  var position = 'sidebar', element = null, clientX, clientY;
+  var position = 'sidebar', element, clientX, clientY, url;
 
-  $(document).ajaxStop(function() {
+  $(document).ajaxComplete(function(event, xhr, settings) {
+    if(settings.url == url) return;
     add();
   }).ready(function() {
     add();
-  }).on('click', '[data-context]', function(e) {
+  }).on('click', '[data-context]', function(event) {
     position ='context';
     element  = $(this);
-    clientX  = e.clientX;
-    clientY  = e.clientY;
+    clientX  = event.clientX;
+    clientY  = event.clientY;
   });
 
   var add = function() {
     // Abort when there is already a delete button in the sidebar
     // But continue when the call comes from a context menu
-    if(position == 'sidebar' && ((window.location.pathname.match(/\//g) || []).length < 3 || $('[data-shortcut="#"]').length)) return;
+    if(position == 'sidebar' && $('[data-shortcut="#"]').length) return;
 
-    var url = window.location.href.replace('/edit', '/options/delete/' + position);
+    url = window.location.href.replace('/edit', '');
 
     if(position == 'context') {
-      url = element.data('context').replace('/context', '/options/delete/context');
+      url = element.data('context').replace('/context', '');
     }
 
-    $.get(url, function(data) {
+    $.get(url + '/options/delete/' + position, function(data) {
 
       if(!data) return;
 
@@ -78,8 +79,13 @@
         });
       }
 
+      app.content.root.shortcuts();
+
       // Reset position
       position ='sidebar';
+
+      // Reset url
+      url = '';
 
     });
   }
