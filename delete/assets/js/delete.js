@@ -49,6 +49,8 @@
   DeleteAction.prototype.add = function(url, position = 'sidebar', force = false) {
     var self = this, slice = position == 'context' ? -8 : -5;
 
+    console.log(url, position, force);
+
     this.deferred = $.Deferred();
     this.url = url
 
@@ -106,7 +108,8 @@
     .ready(function() {
       deleteAction.add(window.location.href, 'sidebar', true);
     })
-    .on('click', '[href*="edit"]', function() {
+    .on('click', '[href*="edit"]:not([data-modal]:not([data-context]))', function() {
+      console.log('click');
       deleteAction.add($(this).attr('href'));
     })
     .on('click', '[data-context]', function(event) {
