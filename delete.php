@@ -98,10 +98,11 @@ $panel->routes[] = array(
     } else if($page->blueprint()->options()->delete() === false) {
       return false;
     } else {
+
       return response::json(array(
         'href'          => $url,
-        'label'         => l('pages.show.delete'),
-        'icon'          => 'trash-o',
+        'label'         => c::get('delete.force.label', l('pages.show.delete')),
+        'icon'          => c::get('delete.force.icon', 'trash-o'),
         'title'         => '#',
         'data-shortcut' => '#',
         'data-modal'    => true,
