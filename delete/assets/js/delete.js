@@ -92,6 +92,10 @@
           });
         }
       }
+
+      // rebind all keyboard shortcuts within the main container
+      app.content.root.shortcuts();
+
     });
   }
 
