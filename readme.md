@@ -1,3 +1,8 @@
+---
+### Kirby 2.5+ supports this out of the box
+---
+
+
 # Kirby Delete
 Allows you to delete pages containing subpages.  
 
